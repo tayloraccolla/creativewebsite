@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import VideoScreen from './components/VideoScreen';
 import { ambientPlayer } from './utils/audio';
 
 // The layout is composed against a fixed 1024x576 canvas (every offset in
@@ -47,7 +46,21 @@ export default function App() {
       {/* Background video fills the viewport independently of the content
           stage, so it reaches every edge (no bars) while only cropping by
           the difference between the window and the clip's 16:9 frame. */}
-      <VideoScreen />
+      <video
+        ref={(el) => {
+          if (el) {
+            el.muted = true;
+            el.play().catch(() => {});
+          }
+        }}
+        poster={`${import.meta.env.BASE_URL}video-poster.jpg`}
+        src={`${import.meta.env.BASE_URL}background-video.mp4`}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0"
+      />
 
       {/* Content stage, scaled to fit and centred over the video */}
       {/* Top-aligned, not centred: when the window is proportionally taller
