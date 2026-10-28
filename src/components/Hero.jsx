@@ -1,23 +1,24 @@
-import React from 'react';
 import ScallopedPlayButton from './ScallopedPlayButton';
 
 export default function Hero({ isPlaying, onTogglePlay }) {
-  return (
-    <section className="relative flex-1 w-full flex flex-col items-center select-none z-10">
-      {/* Main Headline - Instrument Serif with exact 2 lines and vertical cadence:
-          Top: 56px below header (y: 116 in 572px canvas) */}
-      <div className="w-full text-center px-4 mt-[56px]">
-        <h1 className="font-headline text-[54px] leading-[1.12] tracking-[-0.015em] font-normal text-[#000000]">
-          <span className="block">The songs that raised you</span>
-          <span className="block">are still in the racks</span>
-        </h1>
+  return <section className="hero-section" aria-labelledby="hero-title">
+    <img className="hero-photo" src={`${import.meta.env.BASE_URL}images/market.webp`} alt="Sunlit tables, plants and local goods inside Candlewood Market" fetchPriority="high" />
+    <div className="hero-shade" />
+    <div className="hero-content">
+      <p className="eyebrow">A little local. A lot to love.</p>
+      <h1 id="hero-title">Your daily pause,<br /><em>made a little warmer.</em></h1>
+      <p className="hero-description">Good coffee. Fresh bites. A place to stay awhile.<br />Meet your neighborhood market in Fairfield.</p>
+      <div className="hero-actions">
+        <a className="button button-cream" href="#menu">Find your favorite <span aria-hidden="true">↗</span></a>
+        <a className="hero-visit" href="#visit">Come on in <span aria-hidden="true">↗</span></a>
       </div>
-
-      {/* Scalloped Play Badge - exactly positioned in lower center:
-          y: 372 in 572px canvas, 141px below headline */}
-      <div className="mt-[141px] mb-[101px] flex flex-col items-center justify-center">
+    </div>
+    <div className="hero-bottom">
+      <span className="hero-location">85 MILL PLAIN ROAD <span>FAIRFIELD, CONNECTICUT</span></span>
+      <div className="sound-control">
+        <span>{isPlaying ? 'A little café mood' : 'Settle into the mood'}<small>{isPlaying ? 'Sound on · tap to pause' : 'Original ambient sound · tap to play'}</small></span>
         <ScallopedPlayButton isPlaying={isPlaying} onClick={onTogglePlay} />
       </div>
-    </section>
-  );
+    </div>
+  </section>;
 }
